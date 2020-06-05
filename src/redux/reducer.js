@@ -16,7 +16,7 @@ export default function(state = initialState, action){
     switch(type){
         case GET_USER:
             return {...state, user: payload}
-        default:
-            return state
+        default: 
+        return state
     }
 }

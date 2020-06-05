@@ -1,14 +1,22 @@
-import React, {useState} from 'react';
+import React from 'react';
 import './App.css';
 import routes from './routes'
 import {withRouter} from 'react-router-dom'
-function App() {
-  const [user, setUser] = useState({})
+import Header from './Components/Header'
 
-console.log(routes)
+function App(props) {
   return (
     <div className="App">
+      {props.location.pathname === '/' ? 
+      (<>
       {routes}
+      </>
+      ) : (
+      <>
+      <Header />
+      {routes}
+      </>
+      )}
     </div>
   );
 }

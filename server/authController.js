@@ -2,8 +2,8 @@ const bcrypt = require('bcryptjs')
 module.exports = {
     register: async(req, res) => {
         const db = req.app.get('db')
+        console.log(req.body)
         const {email, username, password} = req.body
-
         let user = await db.auth.check_user(email)
         if(user[0]){
            return res.status(401).send('Email already in use')
@@ -17,6 +17,7 @@ module.exports = {
     },
     login: async(req, res) => {
         const db = req.app.get('db')
+        console.log(req.body)
         const {email, password} = req.body
 
         let user = await db.auth.check_user(email)

@@ -1,6 +1,8 @@
 import React from 'react'
+import {connect} from 'react-redux'
 
-const ChatRoom = () => {
+const ChatRoom = (props) => {
+    console.log(props)
 return (
     <div className='ChatRoom'>
         I'm the ChatRoom Component
@@ -8,4 +10,6 @@ return (
 )
 }
 
-export default ChatRoom
+const mapStateToProps = (reduxState) => reduxState
+
+export default connect(mapStateToProps)(ChatRoom)
