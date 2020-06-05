@@ -5,7 +5,7 @@ import ChatRoom from './Components/ChatRoom'
 
 export default (
     <Switch>
-        <Route exact path='/' component={Auth} />
+        <Route exact path='/' component={Auth}/>
         <Route path='/chat' component={ChatRoom} />
     </Switch>
 )
