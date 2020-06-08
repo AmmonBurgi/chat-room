@@ -27,20 +27,20 @@ return (
     <div className='Auth'>
         {toggle === false ? 
         (
-        <form>
+        <div>
            <input className='email' placeholder='Email' onChange={(e) => setEmail(e.target.value)} />
            <input className='password' placeholder='Password' onChange={(e) => setPassword(e.target.value)} />
            <button onClick={login}>Login</button>
            <span>Need an account?<p onClick={() => setToggle(!toggle)}>Register</p></span>
-        </form>
+        </div>
         ) : (
-        <form>
+        <div>
            <input className='email' placeholder='Email' onChange={(e) => setEmail(e.target.value)} />
            <input className='username' placeholder='Username' onChange={(e) => setUsername(e.target.value)} />
            <input className='password' placeholder='Password' onChange={(e) => setPassword(e.target.value)} />
            <button onClick={register}>Register</button>
            <span>Already have an account?<p onClick={() => setToggle(!toggle)}>Login</p></span>
-        </form>
+        </div>
         )}
     </div>
 )
