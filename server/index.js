@@ -5,9 +5,23 @@ const express = require('express'),
     {CONNECTION_STRING, SESSION_SECRET, SERVER_PORT} = process.env,
     authCtrl = require('./authController'),
     app = express(),
+    server = require('http').Server(app),
+    io = require('socket.io')(server),
     port = SERVER_PORT
 
 app.use(express.json())
+
+
+io.on('connection', (socket) => {
+    console.log('a user connected')
+    socket.on('disconnect', () => {
+        console.log('user disconnected')
+    })
+})
+const nsp = io.of('http://localhost:4100/chat')
+nsp.on('connection', (socket) => {
+    console.log('chat user connected')
+})
 
 app.use(
     session({
@@ -28,6 +42,6 @@ massive({
 }).then(db => {
     app.set('db', db)
     console.log('db connected')
-    app.listen(port, () => console.log(`Server listening on port ${port}`))
+    server.listen(port, () => console.log(`Server listening on port ${port}`))
 })
 
