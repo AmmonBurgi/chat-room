@@ -1,27 +1,34 @@
 require('dotenv').config()
 const express = require('express'),
     session = require('express-session'),
-    massive = require('massive'),
+    // massive = require('massive'),
+    mongoose = require('mongoose'),
     {CONNECTION_STRING, SESSION_SECRET, SERVER_PORT} = process.env,
     authCtrl = require('./authController'),
     app = express(),
     server = require('http').Server(app),
     io = require('socket.io')(server),
     port = SERVER_PORT
-
-app.use(express.json())
-
-
-io.on('connection', (socket) => {
-    console.log('a user connected')
-    socket.on('disconnect', () => {
-        console.log('user disconnected')
-    })
+    
+    app.use(express.json())
+    
+    mongoose.connect(CONNECTION_STRING, {useNewUrlParser: true});
+const db = mongoose.connection
+db.on('error', console.error.bind(console, 'connection error:'));
+db.once('open', function(){
+    console.log('db connected')
 })
-const nsp = io.of('http://localhost:4100/chat')
-nsp.on('connection', (socket) => {
-    console.log('chat user connected')
-})
+
+// io.on('connection', (socket) => {
+//     console.log('a user connected')
+//     socket.on('disconnect', () => {
+//         console.log('user disconnected')
+//     })
+// })
+// const nsp = io.of('http://localhost:4100/chat')
+// nsp.on('connection', (socket) => {
+//     console.log('chat user connected')
+// })
 
 app.use(
     session({
@@ -36,12 +43,12 @@ app.get('/api/logout', authCtrl.logout)
 app.post('/api/register', authCtrl.register)
 app.post('/api/login', authCtrl.login)
 
-massive({
-    connectionString: CONNECTION_STRING,
-    ssl: {rejectUnauthorized: false}
-}).then(db => {
-    app.set('db', db)
-    console.log('db connected')
-    server.listen(port, () => console.log(`Server listening on port ${port}`))
-})
+// massive({
+//     connectionString: CONNECTION_STRING,
+//     ssl: {rejectUnauthorized: false}
+// }).then(db => {
+//     app.set('db', db)
+//     console.log('db connected')
+// })
+server.listen(port, () => console.log(`Server listening on port ${port}`))
 
