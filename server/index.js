@@ -12,7 +12,7 @@ const express = require('express'),
     
     app.use(express.json())
     
-    mongoose.connect(CONNECTION_STRING, {useNewUrlParser: true});
+    mongoose.connect(CONNECTION_STRING, {useNewUrlParser: true, useUnifiedTopology: true });
 const db = mongoose.connection
 db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', function(){
