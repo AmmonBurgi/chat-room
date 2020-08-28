@@ -1,7 +1,6 @@
 require('dotenv').config()
 const express = require('express'),
     session = require('express-session'),
-    // massive = require('massive'),
     mongoose = require('mongoose'),
     {CONNECTION_STRING, SESSION_SECRET, SERVER_PORT} = process.env,
     authCtrl = require('./authController'),
