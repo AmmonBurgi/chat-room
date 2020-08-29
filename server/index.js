@@ -41,6 +41,7 @@ app.use(
 app.get('/api/logout', authCtrl.logout)
 app.post('/api/register', authCtrl.register)
 app.post('/api/login', authCtrl.login)
+app.get('/api/session', authCtrl.session)
 
 // massive({
 //     connectionString: CONNECTION_STRING,

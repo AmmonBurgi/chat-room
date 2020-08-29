@@ -1,8 +1,9 @@
-import React from 'react'
+import React, {useEffect} from 'react'
 import {Link} from 'react-router-dom'
 import axios from 'axios'
 import styled from 'styled-components'
 import {connect} from 'react-redux'
+import {getUser} from '../redux/reducer'
 
 const Navbar = styled('header')`
 width: 100vw;
@@ -23,6 +24,15 @@ right: 10px;
 
 const Header = (props) => {
 
+useEffect(() => {
+    if(Object.keys(props.user).length === 0){
+axios.get('/api/session')
+.then((res) => {
+    props.getUser(res.data)
+}).catch(err => console.log(err))
+    }
+}, [])
+
 const logout = () => {
     axios.get('/api/logout')
     .then(() => alert('You are now logged out!'))
@@ -36,4 +46,4 @@ return (
 }
 const mapStateToProps = (reduxState) => reduxState
 
-export default connect(mapStateToProps)(Header)
+export default connect(mapStateToProps, {getUser})(Header)

@@ -12,16 +12,17 @@ const Auth = (props) => {
 const register = () => {
     axios.post('/api/register', {email, username, password})
     .then(res => {
+        console.log(res)
         props.getUser(res.data)
         props.history.push('/chat')
-    }).catch(err => console.log(err))
+    }).catch(err => console.log(err.response.data))
 }
 const login = () => {
     axios.post('/api/login', {email, password})
     .then(res => {
         props.getUser(res.data)
         props.history.push('/chat')
-    }).catch(err => console.log(err))
+    }).catch(err => console.log(err.response.data))
 }
 return (
     <div className='Auth'>
