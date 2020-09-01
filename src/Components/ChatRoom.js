@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react'
+import React, {useEffect} from 'react'
 import {connect} from 'react-redux'
 import io from 'socket.io-client'
 
@@ -8,7 +8,9 @@ const socket = io(endpoint)
 const ChatRoom = (props) => {
  
  useEffect(() => {
-
+    socket.on('connect', () => {
+        console.log()
+    })
  }, [])
 return (
     <div className='ChatRoom'>

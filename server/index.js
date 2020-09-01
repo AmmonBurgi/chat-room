@@ -18,16 +18,16 @@ db.once('open', function(){
     console.log('db connected')
 })
 
-// io.on('connection', (socket) => {
-//     console.log('a user connected')
-//     socket.on('disconnect', () => {
-//         console.log('user disconnected')
-//     })
-// })
-// const nsp = io.of('http://localhost:4100/chat')
-// nsp.on('connection', (socket) => {
-//     console.log('chat user connected')
-// })
+io.on('connection', (socket) => {
+    console.log('a user connected')
+    socket.on('disconnect', () => {
+        console.log('user disconnected')
+    })
+})
+const nsp = io.of('http://localhost:4100/chat')
+nsp.on('connection', (socket) => {
+    console.log('chat user connected')
+})
 
 app.use(
     session({
